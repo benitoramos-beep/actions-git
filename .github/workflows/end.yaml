@@ -23,6 +23,12 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v4
 
+      - name: 'Print variables'
+        run: |
+          echo ${{ github.event_name }}
+          echo ${{ github.ref_name }}
+          echo ${{ github.base_ref }}
+
       - name: 'Run deploy script'
         run: |
           chmod +x ./deploy_pipeline.sh
