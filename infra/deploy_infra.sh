@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "Deploy done"
+echo "Deploy infra... done"

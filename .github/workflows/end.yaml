@@ -1,0 +1,32 @@
+name: "End"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    name: 'Pipeline'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./pipeline
+    env:
+      TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
+    
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Run deploy script'
+        run: |
+          chmod +x ./deploy_pipeline.sh
+          ./deploy_pipeline.sh
+
+
+
