@@ -25,8 +25,8 @@ jobs:
 
       - name: 'Run deploy script'
         run: |
-          chmod +x ./infra/deploy_infra.sh
-          ./infra/deploy_infra.sh
+          chmod +x ./deploy_infra.sh
+          ./deploy_infra.sh
 
 
 
