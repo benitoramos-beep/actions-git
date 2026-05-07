@@ -41,6 +41,7 @@ jobs:
           EVENT_NAME: ${{ steps.env.outputs.event_name }}
           REF_NAME: ${{ steps.env.outputs.ref_name }}
           BASE_NAME: ${{ steps.env.outputs.base_ref }}
+          TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
 
 
 
