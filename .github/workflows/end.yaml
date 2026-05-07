@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -26,9 +29,9 @@ jobs:
       - name: 'Print variables'
         id: env
         run: |
-          echo "event_name=${{ github.event_name }}" >> GITHUB_OUTPUT
-          echo "ref_name=${{ github.ref_name }}"" >> GITHUB_OUTPUT
-          echo "base_ref=${{ github.base_ref }}"" >> GITHUB_OUTPUT
+          echo "event_name=${{ github.event_name }}" >> $GITHUB_OUTPUT
+          echo "ref_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          echo "base_ref=${{ github.base_ref }}" >> $GITHUB_OUTPUT
 
       - name: 'Run deploy script'
         run: |
