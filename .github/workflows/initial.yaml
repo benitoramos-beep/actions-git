@@ -29,18 +29,22 @@ jobs:
       - name: 'Set Outputs (Old Way with EOF)'
         id: set_outputs
         run: |
-          echo '{
+          cat << 'EOF' > dummy_terraform.json
+          {
             "function_build_sa_email": {
               "sensitive": false,
               "type": "string",
               "value": "cuspfe-sa-embase-function-b@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
             },
-            "science_direct_landing_bucket": {
+            "function_sa_email": {
               "sensitive": false,
               "type": "string",
-              "value": "bkt-cuspfe-science-direct-landing-zone"
+              "value": "cuspfe-sa-embase-function@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
             }
-          }' >> $GITHUB_OUTPUT
+          }
+          EOF
+
+          echo "output_vars=$(cat dummy_terraform.json)" >> $GITHUB_OUTPUT
       
       - name: 'Run deploy script'
         run: |
