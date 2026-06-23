@@ -44,7 +44,9 @@ jobs:
           }
           EOF
 
-          echo "output_vars=$(cat dummy_terraform.json)" >> $GITHUB_OUTPUT
+          echo "output_vars <<EOF" >> $GITHUB_OUTPUT
+          cat dummy_terraform.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
       
       - name: 'Run deploy script'
         run: |
