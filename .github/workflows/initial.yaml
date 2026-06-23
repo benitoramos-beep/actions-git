@@ -26,10 +26,20 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v4
 
+      - name: 'Set Outputs (Old Way with EOF)'
+        id: set_outputs
+        run: |
+          echo "output_vars<<EOF" >> $GITHUB_OUTPUT
+          # Simulating a multi-line Terraform JSON output
+          echo '{"function_build_sa_email": {"sensitive": false, "type": "string", "value": "test-email@domain.com"}}' >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
       - name: 'Run deploy script'
         run: |
           chmod +x ./deploy_infra.sh
           ./deploy_infra.sh
+        env:
+          OUTPUT_VARS: ${{ steps.set_outputs.outputs.output_vars }}
 
 
 
