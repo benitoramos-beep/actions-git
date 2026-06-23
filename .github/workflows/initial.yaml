@@ -30,8 +30,18 @@ jobs:
         id: set_outputs
         run: |
           echo "output_vars<<EOF" >> $GITHUB_OUTPUT
-          # Simulating a multi-line Terraform JSON output
-          echo '{"function_build_sa_email": {"sensitive": false, "type": "string", "value": "test-email@domain.com"}}' >> $GITHUB_OUTPUT
+          echo '{
+            "function_build_sa_email": {
+              "sensitive": false,
+              "type": "string",
+              "value": "cuspfe-sa-embase-function-b@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
+            },
+            "science_direct_landing_bucket": {
+              "sensitive": false,
+              "type": "string",
+              "value": "bkt-cuspfe-science-direct-landing-zone"
+            }
+          }' >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
       
       - name: 'Run deploy script'
