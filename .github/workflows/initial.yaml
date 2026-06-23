@@ -31,23 +31,73 @@ jobs:
         run: |
           cat << 'EOF' > dummy_terraform.json
           {
-            "function_build_sa_email": {
-              "sensitive": false,
-              "type": "string",
-              "value": "cuspfe-sa-embase-function-b@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
-            },
-            "function_sa_email": {
-              "sensitive": false,
-              "type": "string",
-              "value": "cuspfe-sa-embase-function@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
-            }
+          "function_build_sa_email": {
+          jq: parse error: Invalid numeric literal at line 1, column 737
+          "sensitive": false,
+          "type": "string",
+          "value": "cuspfe-sa-embase-function-b@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
+          },
+          "function_sa_email": {
+          "sensitive": false,
+          "type": "string",
+          "value": "cuspfe-sa-embase-function@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
+          },
+          "science_direct_ingestion_workflow": {
+          "sensitive": false,
+          "type": "string",
+          "value": "wf-cuspfe_sciencedirect-ingestion"
+          },
+          "science_direct_landing_bucket": {
+          "sensitive": false,
+          "type": "string",
+          "value": "bkt-cuspfe-science-direct-landing-zone"
+          },
+          "springer_nature_bucket": {
+          "sensitive": false,
+          "type": "string",
+          "value": "bkt-cuspfe-springer-nature"
           }
+          }
+          stdout<<ghadelimiter_76189bca-8dbe-4049-990a-67bccd35b1c0
+          {
+          "function_build_sa_email": {
+          "sensitive": false,
+          "type": "string",
+          "value": "cuspfe-sa-embase-function-b@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
+          },
+          "function_sa_email": {
+          "sensitive": false,
+          "type": "string",
+          "value": "cuspfe-sa-embase-function@prj-pfe-data-pfrontiers-dev01.iam.gserviceaccount.com"
+          },
+          "science_direct_ingestion_workflow": {
+          "sensitive": false,
+          "type": "string",
+          "value": "wf-cuspfe_sciencedirect-ingestion"
+          },
+          "science_direct_landing_bucket": {
+          "sensitive": false,
+          "type": "string",
+          "value": "bkt-cuspfe-science-direct-landing-zone"
+          },
+          "springer_nature_bucket": {
+          "sensitive": false,
+          "type": "string",
+          "value": "bkt-cuspfe-springer-nature"
+          }
+          }
+          ghadelimiter_76189bca-8dbe-4049-990a-67bccd35b1c0
+          stderr<<ghadelimiter_78221fc4-911e-456e-9bc3-50bcf47248c1
+          ghadelimiter_78221fc4-911e-456e-9bc3-50bcf47248c1
+          exitcode<<ghadelimiter_4a608c39-85d7-43b6-a949-03c9842be629
+          0
+          ghadelimiter_4a608c39-85d7-43b6-a949-03c9842be629
           EOF
 
-          echo "output_vars<<EOF" >> $GITHUB_OUTPUT
+          DELIMITER=$(dd if=/dev/urandom bs=15 count=1 2>/dev/null | base64 | tr -dc 'a-zA-Z0-9')
+          echo "output_vars<<$DELIMITER" >> $GITHUB_OUTPUT
           cat dummy_terraform.json >> $GITHUB_OUTPUT
-          echo "" >> $GITHUB_OUTPUT # Forces a newline in case the JSON lacks one
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "$DELIMITER" >> $GITHUB_OUTPUT
       
       - name: 'Run deploy script'
         run: |
