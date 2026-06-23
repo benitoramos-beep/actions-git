@@ -2,4 +2,4 @@
 
 echo "Deploy infra... done"
 
-echo $OUTPUT_VARS
+echo "$OUTPUT_VARS" | jq -r '.function_build_sa_email.value'
