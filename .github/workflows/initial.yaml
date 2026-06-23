@@ -29,7 +29,6 @@ jobs:
       - name: 'Set Outputs (Old Way with EOF)'
         id: set_outputs
         run: |
-          echo "output_vars<<EOF" >> $GITHUB_OUTPUT
           echo '{
             "function_build_sa_email": {
               "sensitive": false,
@@ -42,7 +41,6 @@ jobs:
               "value": "bkt-cuspfe-science-direct-landing-zone"
             }
           }' >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
       
       - name: 'Run deploy script'
         run: |
